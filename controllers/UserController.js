@@ -5,9 +5,7 @@
 
 const User = require('../models/User');
 
-// 给ctx.response.body赋值一个js对象，koa会自动序列化为JSON
 class UserController {
-
 
     // 用户注册
     async register(ctx,next) {
@@ -15,8 +13,6 @@ class UserController {
             username: ctx.request.body.username,
             password: ctx.request.body.password
         });
-        // console.log('created: ' + JSON.stringify(user));
-        ctx.response.type = 'application/json';
         var response = {
             'code': '200',
             'user': user
@@ -48,6 +44,11 @@ class UserController {
         });
         ctx.response.type = 'application/json';
         ctx.response.body = user;
+    }
+
+    // 更新用户信息
+    async update(ctx,next) {
+
     }
 
 }
