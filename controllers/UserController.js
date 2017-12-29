@@ -13,6 +13,7 @@ class UserController {
             username: ctx.request.body.username,
             password: ctx.request.body.password
         });
+
         var response = {
             'code': '200',
             'user': user
@@ -36,14 +37,19 @@ class UserController {
 
     // 用户基本信息
     async detail(ctx,next) {
-        console.log(`查询${ctx.request.query.id}`);
+        console.log(`查询用户${ctx.request.query.id}`);
         var user = await User.findAll({
             where: {
                 id: ctx.request.query.id
             }
         });
-        ctx.response.type = 'application/json';
-        ctx.response.body = user;
+
+        if (user.length == 0) {
+            ctx.response.status = 404;
+        } else {
+            ctx.response.type = 'application/json';
+            ctx.response.body = user[0];
+        }
     }
 
     // 更新用户信息

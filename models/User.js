@@ -13,7 +13,10 @@ var User = db.define('user', {
         primaryKey: true
     },
     username: Sequelize.STRING(50),
-    password: Sequelize.STRING(50)
+    password: Sequelize.STRING(50),
+    address: Sequelize.STRING(100),
+    phoneNumber: Sequelize.STRING(11),
+    creditCard: Sequelize.STRING(30)
 }, {
     timestamps: false
 });
