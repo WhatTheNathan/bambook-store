@@ -24,8 +24,24 @@ class UserController {
 
     // 用户登录
     async login(ctx,next) {
+        console.log(`用户登录${ctx.request.query.id}`);
+        var user = await User.findAll({
+            where: {
+                id: ctx.request.query.id,
+                password: ctx.request.query.password
+            }
+        });
+
+        if(user.length == 0){
+            ctx.response.status = 404;
+        }else{
+            var response = {
+                'code': '200',
+                'user': user
+            };
+            ctx.response.body = response;
+        }
         ctx.response.type = 'application/json';
-        // await ……
     }
 
     // 用户退出

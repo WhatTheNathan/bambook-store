@@ -11,8 +11,8 @@ var Order = db.define('order', {
         autoIncrement: true,
         primaryKey: true
     },
-    userID: Sequelize.STRING(50),
-    bookID: Sequelize.STRING(50),
+    userID: Sequelize.INTEGER,
+    bookID: Sequelize.INTEGER,
     orderNum: Sequelize.INTEGER,
     orderTime: Sequelize.DATE,
     orderStatus: Sequelize.STRING(10),

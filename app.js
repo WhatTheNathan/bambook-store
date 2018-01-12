@@ -15,7 +15,7 @@ const ordercontroller = require('./controllers/OrderController');
 
 router
 /// 用户模块api
-    .post('/api/v1/user/login',usercontroller.login)         // 用户登录
+    .get('/api/v1/user/login',usercontroller.login)         // 用户登录
     .post('/api/v1/user/register',usercontroller.register)   // 用户注册
     .post('api/v1/user/update',usercontroller.update)        // 更新用户信息
     .get('/api/v1/user/',usercontroller.detail)              // 用户信息,参数为用户id

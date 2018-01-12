@@ -11,11 +11,11 @@ var Book = db.define('book', {
         autoIncrement: true,
         primaryKey: true
     },
-    ISBN: Sequelize.STRING(50),
+    bookName: Sequelize.STRING(50),
     authorName: Sequelize.STRING(50),
     price: Sequelize.DOUBLE(),
     image_url: Sequelize.STRING(100),
-    remianNum: Sequelize.INTEGER,
+    remainNum: Sequelize.INTEGER,
     soldNum: Sequelize.INTEGER,
     description: Sequelize.STRING(100)
 }, {
