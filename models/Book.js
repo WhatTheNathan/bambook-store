@@ -8,7 +8,7 @@ const db = require('../db');
 var Book = db.define('book', {
     ISBN: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
+        autoIncrement: false,
         primaryKey: true
     },
     bookName: Sequelize.STRING(50),

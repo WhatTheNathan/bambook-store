@@ -12,13 +12,12 @@ var Order = db.define('order', {
         primaryKey: true
     },
     userID: Sequelize.INTEGER,
-    bookID: Sequelize.INTEGER,
+    bookID: Sequelize.STRING(50),
     orderNum: Sequelize.INTEGER,
-    orderTime: Sequelize.DATE,
-    orderStatus: Sequelize.STRING(10),
+    orderStatus: Sequelize.STRING(20),
     bookPrice: Sequelize.DOUBLE()
 }, {
-    timestamps: false
+    timestamps: true
 });
 
 module.exports = Order;
