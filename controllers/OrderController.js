@@ -18,7 +18,6 @@ class OrderController {
         });
 
         var response = {
-            'code': '200',
             'order': order
         };
         ctx.response.type = 'application/json';
@@ -35,15 +34,19 @@ class OrderController {
         });
 
         if (orders.length == 0) {
-            ctx.response.status = 404;
+            // ctx.response.status = 404;
+            var response = {
+                'error' : 'OrderNotFound'
+            };
+            ctx.response.body = response;
         } else {
-            ctx.response.type = 'application/json';
             var response = {
                 'totalCount': orders.length,
                 'orders': orders
             };
             ctx.response.body = response;
         }
+        ctx.response.type = 'application/json';
     }
 
     async deleteOrder(ctx,next) {
@@ -54,12 +57,16 @@ class OrderController {
             }
         });
         if (order.length == 0){
-            ctx.response.status = 404;
-        }else{
-            await order[0].destroy();
+            // ctx.response.status = 404;
             var response = {
-                'code': '200'
+                'error' : 'OrderNotFound'
             };
+            ctx.response.body = response;
+        }else{
+            var response = {
+                'order': order[0]
+            };
+            await order[0].destroy();
             ctx.response.body = response;
         }
         ctx.response.type = 'application/json';
@@ -73,7 +80,11 @@ class OrderController {
             }
         });
         if (order.length == 0){
-            ctx.response.status = 404;
+            // ctx.response.status = 404;
+            var response = {
+                'error' : 'OrderNotFound'
+            };
+            ctx.response.body = response;
         }else{
             order[0].orderStatus = 'finished';
             var book = await Book.findAll({
@@ -87,7 +98,7 @@ class OrderController {
             order[0].orderStatus = 'finished';
             await order[0].save();
             var response = {
-                'code': '200'
+                'order': order[0]
             };
             ctx.response.body = response;
         }
@@ -102,19 +113,22 @@ class OrderController {
             }
         });
         if (order.length == 0) {
-            ctx.response.status = 404;
+            // ctx.response.status = 404;
+            var response = {
+                'error' : 'OrderNotFound'
+            };
+            ctx.response.body = response;
         } else {
             if (ctx.request.body.orderNum.length != 0) {
                 order[0].orderNum = ctx.request.body.orderNum;
             }
             await order[0].save();
             var response = {
-                'code': '200',
                 'order': order[0]
             };
-            ctx.response.type = 'application/json';
             ctx.response.body = response;
         }
+        ctx.response.type = 'application/json';
     }
 
 }

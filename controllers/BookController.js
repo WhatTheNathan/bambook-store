@@ -20,7 +20,6 @@ class BookController {
         });
 
         var response = {
-            'code': '200',
             'book': book
         };
         ctx.response.type = 'application/json';
@@ -37,11 +36,15 @@ class BookController {
         });
 
         if (book.length == 0) {
-            ctx.response.status = 404;
+            // ctx.response.status = 403;
+            var response = {
+                'error' : 'BookNotFound'
+            };
+            ctx.response.body = response;
         } else {
-            ctx.response.type = 'application/json';
             ctx.response.body = book[0];
         }
+        ctx.response.type = 'application/json';
     }
 
     // 模糊查询书籍基本信息 By authorName、Title、ISBN
@@ -64,15 +67,19 @@ class BookController {
         });
 
         if (book.length == 0) {
-            ctx.response.status = 404;
+            // ctx.response.status = 404;
+            var response = {
+                'error' : 'BookNotFound'
+            };
+            ctx.response.body = response;
         } else {
-            ctx.response.type = 'application/json';
             var response = {
                 'totalCount': book.length,
                 'books': book
             };
             ctx.response.body = response;
         }
+        ctx.response.type = 'application/json';
     }
 }
 
